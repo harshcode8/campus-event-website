@@ -6,6 +6,16 @@ A modern, fully-functional campus event management platform built with **Node.js
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
+## 👨‍💻 Developer
+
+### Harsh Kumar
+Full-Stack Developer | AI & Web Enthusiast
+
+### 🔗 Connect With Me
+
+- GitHub: https://github.com/harshcode8
+- LinkedIn: (https://www.linkedin.com/in/harsh-kumar-627a6b2b4)
+- Email: mailto:hrsh0018@gmail.com
 ---
 
 ## 📋 Table of Contents
