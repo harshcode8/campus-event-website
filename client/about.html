@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Campus Event Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+</head>
+<body>
+    <div class="bg-animated">
+        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    </div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><div class="nav-logo-icon">🎓</div>Campus Event Tracker</a>
+            <div class="nav-links">
+                <a href="/">Home</a><a href="/events">Events</a><a href="/host">Host Event</a><a href="/about" class="active">About Us</a><a href="/contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <a href="/">🏠 Home</a><a href="/events">📅 Events</a><a href="/host">🚀 Host Event</a><a href="/about" class="active">ℹ️ About Us</a><a href="/contact">📧 Contact</a>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="container" style="text-align:center;">
+            <span class="overline" style="color:var(--secondary); font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:2px;">About Us</span>
+            <h1 style="font-size:clamp(2rem,4vw,3rem); margin:16px 0;">
+                Empowering Campus<br><span class="gradient-text">Event Culture</span>
+            </h1>
+            <p style="color:var(--text-secondary); max-width:600px; margin:0 auto; font-size:1.05rem;">
+                We're on a mission to make campus events accessible, discoverable, and impactful for every student.
+            </p>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="section reveal">
+        <div class="container">
+            <div style="max-width:800px; margin:0 auto; text-align:center;">
+                <h2 style="margin-bottom:20px;">What is Campus Event Tracker?</h2>
+                <p style="color:var(--text-secondary); font-size:1rem; line-height:1.9; margin-bottom:24px;">
+                    Campus Event Tracker is a comprehensive web-based platform designed to streamline the process of discovering, hosting, and participating in college events. In many educational institutions, event information is scattered across WhatsApp groups, notice boards, and word-of-mouth — making it easy for students to miss opportunities. Our platform centralizes all event information in one beautiful, easy-to-use interface.
+                </p>
+                <p style="color:var(--text-secondary); font-size:1rem; line-height:1.9;">
+                    Whether you're an organizer looking to reach more students, or a participant searching for events that match your interests, Campus Event Tracker has you covered. With features like smart search, category filtering, real-time join counters, and a completely offline-capable architecture, this platform is built for the real needs of campus communities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="section reveal">
+        <div class="container">
+            <div class="features-grid" style="max-width:800px; margin:0 auto;">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Our Mission</h3>
+                    <p>To create a unified digital platform that ensures no student misses an opportunity and every event reaches its maximum potential audience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Our Vision</h3>
+                    <p>To become the go-to platform for campus event management across universities, fostering a vibrant and connected student community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section reveal">
+        <div class="container">
+            <div class="stats-grid" style="max-width:800px; margin:0 auto;">
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-number" style="font-size:2rem;">8+</div>
+                    <div class="stat-label">Event Categories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number" style="font-size:2rem;">1-Click</div>
+                    <div class="stat-label">Join System</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💻</div>
+                    <div class="stat-number" style="font-size:2rem;">100%</div>
+                    <div class="stat-label">Responsive</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Timeline -->
+    <section class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="overline">Development Journey</span>
+                <h2>Project Timeline</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 1-2</div>
+                    <h3>Research & Planning</h3>
+                    <p>Analyzed existing campus event management problems and designed the solution architecture</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 3-4</div>
+                    <h3>Backend Development</h3>
+                    <p>Built Express.js server with SQLite database, REST APIs, and anti-rejoin logic</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 5-7</div>
+                    <h3>Frontend Development</h3>
+                    <p>Created responsive glassmorphism UI with animations, event pages, and host form</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 8</div>
+                    <h3>Testing & Polish</h3>
+                    <p>Comprehensive testing, bug fixes, performance optimization, and demo preparation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="overline">The Person Behind</span>
+                <h2>Meet the Developer</h2>
+                <p>The passionate developer who built this platform</p>
+            </div>
+            <div class="team-card">
+    <div class="team-avatar">HK</div>
+
+    <h2>HARSH KUMAR</h2>
+
+    <div class="team-role">
+        Full-Stack Developer | AI & Web Enthusiast
+    </div>
+
+    <p class="team-description">
+        Dedicated and innovative developer with strong foundations in
+        Java, JavaScript, ReactJS, and modern web technologies.
+        Passionate about Artificial Intelligence, automation, and
+        building intelligent systems that improve efficiency and
+        real-world workflows. Experienced in developing web
+        applications, digital platforms, and software solutions with
+        database integration and responsive UI design.
+    </p>
+
+    <div class="team-skills">
+        <span>Java</span>
+        <span>JavaScript</span>
+        <span>ReactJS</span>
+        <span>Node.js</span>
+        <span>MongoDB</span>
+        <span>MySQL</span>
+        <span>Firebase</span>
+        <span>AI Tools</span>
+        <span>GitHub</span>
+        <span>OOPS</span>
+    </div>
+
+    <div class="team-details">
+        <p><strong>Education:</strong> BCA (FullStack + AI)</p>
+        <p><strong>University:</strong> TMU, Moradabad</p>
+        <p><strong>AGPA:</strong> 9.0</p>
+        <p><strong>Location:</strong> Uttar Pradesh, India</p>
+    </div>
+
+    <div class="team-links">
+        <a href="https://github.com/harshcode8" target="_blank">
+            GitHub
+        </a>
+
+        <a href="https://www.linkedin.com/in/harsh-kumar-627a6b2b4" target="_blank">
+            LinkedIn
+        </a>
+
+        <a href="mailto:hrsh0018@gmail.com">
+            Email
+        </a>
+
+        
+    </div>
+</div>
+</div>
+                <!-- <div class="team-card">
+                    <div class="team-avatar" style="background:var(--gradient-1);">SP</div>
+                    <h3>Sneha Patel</h3>
+                    <div class="team-role">UI/UX Designer</div>
+                    <p>Glassmorphism design system, animations, and responsive layouts</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar" style="background:var(--gradient-3);">RV</div>
+                    <h3>Rohan Verma</h3>
+                    <div class="team-role">Frontend Developer</div>
+                    <p>Event pages, filtering logic, and interactive components</p>
+                </div> 
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="overline">Built With</span>
+                <h2>Technology Stack</h2>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card"><div class="tech-icon">🟢</div><div class="tech-name">Node.js</div></div>
+                <div class="tech-card"><div class="tech-icon">⚡</div><div class="tech-name">Express.js</div></div>
+                <div class="tech-card"><div class="tech-icon">🗃️</div><div class="tech-name">SQLite</div></div>
+                <div class="tech-card"><div class="tech-icon">🌐</div><div class="tech-name">HTML5</div></div>
+                <div class="tech-card"><div class="tech-icon">🎨</div><div class="tech-name">CSS3</div></div>
+                <div class="tech-card"><div class="tech-icon">⚡</div><div class="tech-name">JavaScript</div></div>
+            
+                <div class="tech-card"><div class="tech-icon">📁</div><div class="tech-name">Multer</div></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-gradient-line"></div>
+        <div class="footer-grid">
+            <div class="footer-col"><h4>🎓 Campus Event Tracker</h4><p>Your one-stop platform for Hosting and Joining campus events.</p></div>
+            <div class="footer-col"><h4>Quick Links</h4><a href="/">Home</a><a href="/events">Events</a><a href="/host">Host Event</a><a href="/about" class="active">About Us</a><a href="/contact">Contact</a></div>
+            <div class="footer-col"><h4>Contact</h4><p>📍 Moradabad, Uttar Pradesh</p><p>📧 ssharsh108@gmail.com</p></div>
+        </div>
+        <div class="footer-bottom"><p>© 2025 Campus Event Tracker. Design & Developed by Harsh Kumar.</p></div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop">↑</button>
+    <script src="/js/app.js"></script>
+</body>
+</html>

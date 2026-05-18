@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Event - Campus Event Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+</head>
+<body>
+    <div class="bg-animated">
+        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    </div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><div class="nav-logo-icon">🎓</div>Campus Event Tracker</a>
+            <div class="nav-links">
+                <a href="/">Home</a><a href="/events">Events</a><a href="/host" class="active">Host Event</a><a href="/about">About Us</a><a href="/contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <a href="/">🏠 Home</a><a href="/events">📅 Events</a><a href="/host" class="active">🚀 Host Event</a><a href="/about">ℹ️ About Us</a><a href="/contact">📧 Contact</a>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <section style="padding-top:100px; padding-bottom:40px;">
+        <div class="container">
+            <div class="section-header">
+                <span class="overline">Organizer Portal</span>
+                <h2>Host a New Event</h2>
+                <p>Fill in the details below to list your event on the platform</p>
+            </div>
+
+            <div style="max-width:800px; margin:0 auto;">
+                <form id="hostEventForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Event Name <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="event_name" placeholder="e.g., TechVista 2025" required>
+                        <div class="form-error">Please enter event name</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category <span class="required">*</span></label>
+                            <select class="form-select" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="Hackathon">Hackathon</option>
+                                <option value="Workshop">Workshop</option>
+                                <option value="Cultural">Cultural</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Seminar">Seminar</option>
+                                <option value="Technical">Technical</option>
+                            </select>
+                            <div class="form-error">Please select a category</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Event Mode <span class="required">*</span></label>
+                            <select class="form-select" name="mode" required>
+                                <option value="Offline">Offline</option>
+                                <option value="Online">Online</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description <span class="required">*</span></label>
+                        <textarea class="form-textarea" name="description" placeholder="Describe your event in detail..." required></textarea>
+                        <div class="form-error">Please enter event description</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Organizing Team Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" name="organizer_name" placeholder="e.g., ACM Student Chapter" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Number <span class="required">*</span></label>
+                            <input type="tel" class="form-input" name="contact" placeholder="+91 9876543210" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Organizer Email <span class="required">*</span></label>
+                        <input type="email" class="form-input" name="email" placeholder="organizer@campus.edu" required>
+                        <div class="form-error">Please enter a valid email</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Venue <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="venue" placeholder="e.g., Main Auditorium, Block A" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Event Date <span class="required">*</span></label>
+                            <input type="date" class="form-input" name="event_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Event Time</label>
+                            <input type="time" class="form-input" name="event_time" value="10:00">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Last Registration Date <span class="required">*</span></label>
+                        <input type="date" class="form-input" name="last_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Joining Fee (₹) <span class="required">*</span></label>
+                        <input type="number" class="form-input" name="fee" placeholder="0 for free events" min="0" value="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Event Banner Image <span class="required">*</span></label>
+                        <div class="upload-zone" id="bannerUpload">
+                            <div class="upload-icon">📷</div>
+                            <p>Click or drag & drop to upload banner</p>
+                            <p class="upload-hint">Recommended: 1200x600px, Max 5MB</p>
+                            <input type="file" name="banner" accept="image/*" style="display:none;" required>
+                        </div>
+                        <div class="image-preview-grid" id="bannerPreview"></div>
+                        <div class="form-error">Please upload a banner image</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Google Form Link</label>
+                        <input type="url" class="form-input" name="google_form_link" placeholder="https://forms.gle/...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>WhatsApp Group Link</label>
+                        <input type="url" class="form-input" name="whatsapp_link" placeholder="https://chat.whatsapp.com/...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>External Website Link</label>
+                        <input type="url" class="form-input" name="external_link" placeholder="https://...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Custom Joining Instructions</label>
+                        <textarea class="form-textarea" name="custom_instructions" placeholder="Any special instructions for participants..." style="min-height:80px;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Event Rules</label>
+                        <textarea class="form-textarea" name="rules" placeholder="List the rules for your event (one per line)..." style="min-height:100px;"></textarea>
+                    </div>
+
+                    <div style="display:flex; gap:16px; margin-top:32px;">
+                        <button type="submit" class="btn btn-primary" style="flex:1;" onclick="addRipple(event)">
+                            🚀 Create Event
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="addRipple(event)">
+                            Reset Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-gradient-line"></div>
+        <div class="footer-grid">
+            <div class="footer-col"><h4>🎓 Campus Event Tracker</h4><p>Your one-stop platform for campus events.</p></div>
+            <div class="footer-col"><h4>Quick Links</h4><a href="/">Home</a><a href="/events">Events</a><a href="/host">Host Event</a><a href="/about">About Us</a><a href="/contact">Contact</a></div>
+            <div class="footer-col"><h4>Contact</h4><p>📍 Moradabad, Uttar Pradesh</p><p>📧 ssharsh108@gmail.com</p></div>
+        </div>
+        <div class="footer-bottom"><p>© 2025 Campus Event Tracker. Developed and Designed by Harsh Kumar.</p></div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop">↑</button>
+    <script src="/js/app.js"></script>
+    <script src="/js/host.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "campus-event-tracker",
+  "version": "1.0.0",
+  "description": "A modern campus event tracking and hosting platform built with Node.js, Express, and SQLite",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "keywords": [
+    "campus",
+    "events",
+    "tracker",
+    "college"
+  ],
+  "author": "Campus Event Tracker Team",
+  "license": "MIT",
+  "dependencies": {
+    "sqlite3": "^5.1.7",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^9.0.0"
+  }
+}

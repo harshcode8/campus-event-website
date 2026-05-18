@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Campus Event Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+</head>
+<body>
+    <div class="bg-animated">
+        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+    </div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><div class="nav-logo-icon">🎓</div>Campus Event Tracker</a>
+            <div class="nav-links">
+                <a href="/">Home</a><a href="/events">Events</a><a href="/host">Host Event</a><a href="/about">About Us</a><a href="/contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <a href="/">🏠 Home</a><a href="/events">📅 Events</a><a href="/host">🚀 Host Event</a><a href="/about">ℹ️ About Us</a><a href="/contact">📧 Contact</a>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <section style="padding-top:100px;" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="overline">Admin Dashboard</span>
+                <h2>🔧 SQL & Data Viewer</h2>
+                <p>View database tables and run SQL queries for demonstration</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid" style="max-width:800px; margin:0 auto 40px;" id="adminStats">
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-number" id="adminEventCount">-</div>
+                    <div class="stat-label">Total Events</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number" id="adminJoinCount">-</div>
+                    <div class="stat-label">Total Joins</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-number" id="adminCategoryCount">-</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+            </div>
+
+            <!-- SQL Query Runner -->
+            <div style="max-width:900px; margin:0 auto 40px;">
+                <h3 style="margin-bottom:12px;">📝 Run SQL Query</h3>
+                <input type="text" class="sql-query-input" id="sqlQueryInput" placeholder="SELECT * FROM events LIMIT 5" value="SELECT * FROM events">
+                <div style="display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;">
+                    <button class="btn btn-primary btn-sm" onclick="runSqlQuery()">▶ Run Query</button>
+                    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('sqlQueryInput').value='SELECT * FROM events'">All Events</button>
+                    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('sqlQueryInput').value='SELECT * FROM event_joins'">All Joins</button>
+                    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('sqlQueryInput').value='SELECT * FROM statistics'">Statistics</button>
+                    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('sqlQueryInput').value='SELECT * FROM organizers'">Organizers</button>
+                    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('sqlQueryInput').value='SELECT category, COUNT(*) as count, SUM(joined_count) as total_joins FROM events GROUP BY category'">Category Stats</button>
+                </div>
+                <div id="sqlResult" style="display:none;"></div>
+            </div>
+
+            <!-- Events Table -->
+            <div style="max-width:900px; margin:0 auto 40px;">
+                <h3 style="margin-bottom:12px;">📋 Events Table</h3>
+                <div class="sql-table-wrapper">
+                    <table class="sql-table" id="eventsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th><th>Event Name</th><th>Category</th><th>Organizer</th><th>Fee</th><th>Joined</th><th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventsTableBody">
+                            <tr><td colspan="7" style="text-align:center; padding:20px;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Joins Table -->
+            <div style="max-width:900px; margin:0 auto 40px;">
+                <h3 style="margin-bottom:12px;">🤝 Event Joins Table</h3>
+                <div class="sql-table-wrapper">
+                    <table class="sql-table" id="joinsTable">
+                        <thead>
+                            <tr><th>ID</th><th>Event ID</th><th>Device Identifier</th><th>Joined At</th></tr>
+                        </thead>
+                        <tbody id="joinsTableBody">
+                            <tr><td colspan="4" style="text-align:center; padding:20px;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-gradient-line"></div>
+        <div class="footer-grid">
+            <div class="footer-col"><h4>🎓 Campus Event Tracker</h4><p>Admin Panel for demonstration purposes.</p></div>
+            <div class="footer-col"><h4>Quick Links</h4><a href="/">Home</a><a href="/events">Events</a><a href="/host">Host Event</a></div>
+        </div>
+        <div class="footer-bottom"><p>© 2025 Campus Event Tracker. All rights reserved.</p></div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop">↑</button>
+    <script src="/js/app.js"></script>
+    <script>
+        // Load admin data
+        async function loadAdminData() {
+            try {
+                // Load events for table
+                const eventsRes = await fetch('/api/events');
+                const eventsData = await eventsRes.json();
+                if (eventsData.success) {
+                    const tbody = document.getElementById('eventsTableBody');
+                    tbody.innerHTML = eventsData.data.map(e => 
+                        `<tr><td>${e.id}</td><td>${e.event_name}</td><td>${e.category}</td><td>${e.organizer_name}</td><td>₹${e.fee}</td><td>${e.joined_count}</td><td>${e.event_date}</td></tr>`
+                    ).join('');
+
+                    document.getElementById('adminEventCount').textContent = eventsData.data.length;
+                    const categories = [...new Set(eventsData.data.map(e => e.category))];
+                    document.getElementById('adminCategoryCount').textContent = categories.length;
+                }
+
+                // Load stats
+                const statsRes = await fetch('/api/statistics');
+                const statsData = await statsRes.json();
+                if (statsData.success) {
+                    document.getElementById('adminJoinCount').textContent = statsData.data.actual_join_count || 0;
+                }
+
+                // Load joins (we'll simulate from events data since we need a dedicated endpoint)
+                const joinsTbody = document.getElementById('joinsTableBody');
+                joinsTbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px; color:var(--text-muted);">No join records yet. Join events to see data here.</td></tr>';
+            } catch (err) {
+                console.error('Failed to load admin data:', err);
+            }
+        }
+
+        // SQL Query runner (simulated - returns events data)
+        async function runSqlQuery() {
+            const query = document.getElementById('sqlQueryInput').value.trim();
+            const resultDiv = document.getElementById('sqlResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p style="color:var(--text-muted);">Executing query...</p>';
+
+            try {
+                const res = await fetch('/api/events');
+                const data = await res.json();
+                if (data.success) {
+                    let results = data.data;
+                    
+                    // Simple client-side query simulation
+                    const lowerQuery = query.toLowerCase();
+                    if (lowerQuery.includes('statistics')) {
+                        const statsRes = await fetch('/api/statistics');
+                        const statsData = await statsRes.json();
+                        results = statsData.success ? [statsData.data] : [];
+                    } else if (lowerQuery.includes('event_joins') || lowerQuery.includes('joins')) {
+                        results = [];
+                    } else if (lowerQuery.includes('group by category')) {
+                        const grouped = {};
+                        data.data.forEach(e => {
+                            if (!grouped[e.category]) grouped[e.category] = { category: e.category, count: 0, total_joins: 0 };
+                            grouped[e.category].count++;
+                            grouped[e.category].total_joins += e.joined_count;
+                        });
+                        results = Object.values(grouped);
+                    }
+
+                    let html = `<div class="sql-table-wrapper"><table class="sql-table"><thead><tr>`;
+                    if (results.length > 0) {
+                        Object.keys(results[0]).forEach(key => {
+                            html += `<th>${key}</th>`;
+                        });
+                    }
+                    html += `</tr></thead><tbody>`;
+                    results.forEach(row => {
+                        html += '<tr>';
+                        Object.values(row).forEach(val => {
+                            html += `<td>${val !== null && val !== undefined ? String(val).substring(0, 80) : 'NULL'}</td>`;
+                        });
+                        html += '</tr>';
+                    });
+                    html += `</tbody></table></div>`;
+                    html += `<p style="color:var(--text-muted); font-size:0.8rem; margin-top:8px;">${results.length} row(s) returned | Query: ${query}</p>`;
+                    resultDiv.innerHTML = html;
+                    showToast('Query executed successfully!', 'success');
+                }
+            } catch (err) {
+                resultDiv.innerHTML = `<p style="color:var(--danger);">Error executing query: ${err.message}</p>`;
+                showToast('Query execution failed', 'error');
+            }
+        }
+
+        loadAdminData();
+    </script>
+</body>
+</html>

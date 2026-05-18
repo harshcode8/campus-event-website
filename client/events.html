@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Campus Event Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animated">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-icon">🎓</div>
+                Campus Event Tracker
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/events" class="active">Events</a>
+                <a href="/host">Host Event</a>
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <a href="/">🏠 Home</a>
+        <a href="/events" class="active">📅 Events</a>
+        <a href="/host">🚀 Host Event</a>
+        <a href="/about">ℹ️ About Us</a>
+        <a href="/contact">📧 Contact</a>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Page Header -->
+    <section style="padding-top:100px; padding-bottom:20px;">
+        <div class="container">
+            <div class="section-header" style="margin-bottom:24px;">
+                <span class="overline">Discover</span>
+                <h2>All Campus Events</h2>
+                <p>Explore, filter, and join events that excite you</p>
+            </div>
+
+            <!-- Live Ticker -->
+            <div class="live-ticker">
+                <span class="ticker-dot"></span>
+                <span class="ticker-text" id="tickerText">🔥 TechVista 2025 has 156 joins! · 🎭 Cultural Night is trending! · 🏀 Basketball Tournament registrations closing soon! · 💡 AI/ML Workshop seats filling fast!</span>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search events by name, description, or organizer...">
+                </div>
+                <select id="sortSelect" class="form-select">
+                    <option value="latest">Latest First</option>
+                    <option value="fee_low">Fees: Low to High</option>
+                    <option value="fee_high">Fees: High to Low</option>
+                    <option value="last_date">Registration Deadline</option>
+                </select>
+            </div>
+            <div class="category-pills" id="categoryPills">
+                <button class="category-pill active" data-category="All">All</button>
+                <button class="category-pill" data-category="Technical">Technical</button>
+                <button class="category-pill" data-category="Cultural">Cultural</button>
+                <button class="category-pill" data-category="Sports">Sports</button>
+                <button class="category-pill" data-category="Workshop">Workshop</button>
+                <button class="category-pill" data-category="Seminar">Seminar</button>
+                <button class="category-pill" data-category="Hackathon">Hackathon</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="section" style="padding-top:0;">
+        <div class="container">
+            <div id="eventsGrid" class="events-grid">
+                <div class="skeleton skeleton-card"></div>
+                <div class="skeleton skeleton-card"></div>
+                <div class="skeleton skeleton-card"></div>
+                <div class="skeleton skeleton-card"></div>
+                <div class="skeleton skeleton-card"></div>
+                <div class="skeleton skeleton-card"></div>
+            </div>
+            <div id="emptyState" class="empty-state" style="display:none;">
+                <div class="empty-icon">🔍</div>
+                <h3>No Events Found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Detail Modal -->
+    <div class="modal-overlay" id="eventModal">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-image" id="modalImage"></div>
+            <div class="modal-body" id="modalBody">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Confirm Modal -->
+    <div class="modal-overlay" id="joinModal">
+        <div class="modal" style="max-width:480px;">
+            <div class="confirm-popup">
+                <!-- Confirm popup content (shown initially) -->
+                <div id="confirmPopupContent">
+                    <div class="confirm-icon">🎉</div>
+                    <h3>Join This Event?</h3>
+                    <p id="joinEventName">Event Name</p>
+                    <div class="confirm-buttons">
+                        <button class="btn btn-secondary btn-sm" id="cancelJoinBtn" onclick="closeJoinModal()">Cancel</button>
+                        <button class="btn btn-primary btn-sm" id="confirmJoinBtn">Yes, Join!</button>
+                    </div>
+                </div>
+                <!-- Revealed contact details (shown after join) -->
+                <div id="revealedContactSection" style="display:none;">
+                    <!-- Populated dynamically by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-gradient-line"></div>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>🎓 Campus Event Tracker</h4>
+                <p>Your one-stop platform for campus events.</p>
+                <div class="footer-social">
+                    <a href="#">🐦</a><a href="#">📸</a><a href="#">💼</a><a href="#">🐙</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="/">Home</a><a href="/events">Events</a><a href="/host">Host Event</a><a href="/about">About Us</a><a href="/contact">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <a href="#">Hackathon</a><a href="#">Workshop</a><a href="#">Cultural</a><a href="#">Sports</a><a href="#">Seminar</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>📍 Moradabad, Uttar Pradesh</p>
+                <p>📧 ssharsh108@gmail.com</p>
+                <p>📞 +91 98765 43210</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Campus Event Tracker. Developed and Designed by Harsh Kumar.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop">↑</button>
+    <script src="/js/app.js"></script>
+    <script src="/js/events.js"></script>
+</body>
+</html>
