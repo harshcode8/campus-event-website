@@ -9,7 +9,7 @@ A modern, fully-functional campus event management platform built with **Node.js
 ## 👨‍💻 Developer
 
 ### Harsh Kumar
-Full-Stack Developer | AI & Web Enthusiast
+Full-Stack Developer | AI & Fullstack Developer
 
 ### 🔗 Connect With Me
 
