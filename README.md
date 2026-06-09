@@ -119,19 +119,19 @@ Both commands should print a version number without errors.
 
 ## 🚀 Installation & Setup
 
-### Step 1 — Clone the repository
+### Step 1 — Clone the repository.
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/campus-event-tracker.git
 ```
 
-### Step 2 — Navigate into the project folder
+### Step 2 — Navigate into the project folder.
 
 ```bash
 cd campus-event-tracker
 ```
 
-### Step 3 — Install dependencies
+### Step 3 — Install dependencies.
 
 ```bash
 npm install
